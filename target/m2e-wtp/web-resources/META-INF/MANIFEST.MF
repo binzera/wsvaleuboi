@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: binzera
+Build-Jdk: 1.8.0_20
+Implementation-Title: 
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: br.gms
+Implementation-Vendor: SERPRO - Serviço Federal de Processamento de D
+ ados
+Created-By: Maven Integration for Eclipse
+
