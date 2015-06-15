@@ -5,16 +5,25 @@
 	<!-- If you are using JBoss AS7 with non JTA transaction then use this persistence-unit -->
 	<!--
 	-->
-	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
-		<non-jta-data-source>java:jboss/datasources/ExampleDS</non-jta-data-source>
+	
+	<persistence-unit name="siscofaDS" transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>java:jboss/datasources/Siscofa</non-jta-data-source>
 
-		<class>br.gms.wsvaleuboi.entity.Bookmark</class>
+		<class>br.gms.wsvaleuboi.entity.Usuario</class>
+		<class>br.gms.wsvaleuboi.entity.Configuracao</class>
+		<class>br.gms.wsvaleuboi.entity.Fazenda</class>
+		<class>br.gms.wsvaleuboi.entity.Idade</class>
+		<class>br.gms.wsvaleuboi.entity.LoteGado</class>
+		<class>br.gms.wsvaleuboi.entity.MovimentacaoGado</class>
+		<class>br.gms.wsvaleuboi.entity.RacaGado</class>
+		<class>br.gms.wsvaleuboi.entity.TipoMovimentacao</class>
+		
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 		</properties>
 	</persistence-unit>
 
