@@ -1,8 +1,18 @@
 package br.gms.wsvaleuboi.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 /**
@@ -12,19 +22,13 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="movimentacao_gado")
 @NamedQuery(name="MovimentacaoGado.findAll", query="SELECT m FROM MovimentacaoGado m")
-public class MovimentacaoGado implements Serializable {
+public class MovimentacaoGado extends AbstractTimestampEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="MOVIMENTACAO_GADO_ID_GENERATOR", sequenceName="seq_movimentacao")
+	@SequenceGenerator(name="MOVIMENTACAO_GADO_ID_GENERATOR", sequenceName="MOVIMENTACAO_SEQUENCE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MOVIMENTACAO_GADO_ID_GENERATOR")
 	private Integer id;
-
-	@Column(name="dt_inclusao")
-	private Timestamp dtInclusao;
-
-	@Column(name="dt_modificacao")
-	private Integer dtModificacao;
 
 	@Column(name="qtd_arrobas")
 	private Integer qtdArrobas;
@@ -60,22 +64,6 @@ public class MovimentacaoGado implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Timestamp getDtInclusao() {
-		return this.dtInclusao;
-	}
-
-	public void setDtInclusao(Timestamp dtInclusao) {
-		this.dtInclusao = dtInclusao;
-	}
-
-	public Integer getDtModificacao() {
-		return this.dtModificacao;
-	}
-
-	public void setDtModificacao(Integer dtModificacao) {
-		this.dtModificacao = dtModificacao;
 	}
 
 	public Integer getQtdArrobas() {

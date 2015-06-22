@@ -39,10 +39,6 @@ public class SiscofaREST {
 		
 		Object retorno = bc.cadastrarUsuario(body);
 		
-//		if(retorno instanceof Usuario){
-//			String id = ((Usuario) retorno).getId().toString();
-//			URI location = uriInfo.getRequestUriBuilder().path(id).build();
-//		}
 		return Response.ok(retorno)
 		.type(MediaType.APPLICATION_JSON)
 		.header("Access-Control-Allow-Origin", "*")

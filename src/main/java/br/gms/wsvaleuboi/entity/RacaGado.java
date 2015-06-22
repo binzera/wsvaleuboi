@@ -1,7 +1,12 @@
 package br.gms.wsvaleuboi.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.List;
 
 
@@ -12,17 +17,19 @@ import java.util.List;
 @Entity
 @Table(name="raca_gado")
 @NamedQuery(name="RacaGado.findAll", query="SELECT r FROM RacaGado r")
-public class RacaGado implements Serializable {
+public class RacaGado extends AbstractTimestampEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="RACA_GADO_ID_GENERATOR", sequenceName="HIBERNATE_SEQUENCE")
+	@SequenceGenerator(name="RACA_GADO_ID_GENERATOR", sequenceName="RACA_SEQUENCE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RACA_GADO_ID_GENERATOR")
 	private Integer id;
-
+	
+	@Column(nullable=false, unique=true)
 	private String nome;
 
 	//bi-directional many-to-one association to LoteGado
+	@JsonIgnore
 	@OneToMany(mappedBy="racaGado")
 	private List<LoteGado> loteGados;
 

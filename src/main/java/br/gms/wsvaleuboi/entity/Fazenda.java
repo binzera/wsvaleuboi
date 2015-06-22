@@ -1,9 +1,18 @@
 package br.gms.wsvaleuboi.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -12,19 +21,13 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Fazenda.findAll", query="SELECT f FROM Fazenda f")
-public class Fazenda implements Serializable {
+public class Fazenda extends AbstractTimestampEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAZENDA_ID_GENERATOR", sequenceName="seq_fazenda")
+	@SequenceGenerator(name="FAZENDA_ID_GENERATOR", sequenceName="FAZENDA_SEQUENCE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAZENDA_ID_GENERATOR")
 	private Integer id;
-
-	@Column(name="dt_inclusao")
-	private Timestamp dtInclusao;
-
-	@Column(name="dt_modificacao")
-	private Timestamp dtModificacao;
 
 	private String nome;
 
@@ -48,22 +51,6 @@ public class Fazenda implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Timestamp getDtInclusao() {
-		return this.dtInclusao;
-	}
-
-	public void setDtInclusao(Timestamp dtInclusao) {
-		this.dtInclusao = dtInclusao;
-	}
-
-	public Timestamp getDtModificacao() {
-		return this.dtModificacao;
-	}
-
-	public void setDtModificacao(Timestamp dtModificacao) {
-		this.dtModificacao = dtModificacao;
 	}
 
 	public String getNome() {

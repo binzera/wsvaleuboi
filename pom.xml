@@ -58,5 +58,32 @@
 			<version>4.3.4</version><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Adicionado -->
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4.0,)</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1101-jdbc41</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.2.0.Final</version>
+		</dependency>
+
+
+		
+		<!-- Adicionado  -->
+		
 	</dependencies>
+	
+
+	
 </project>

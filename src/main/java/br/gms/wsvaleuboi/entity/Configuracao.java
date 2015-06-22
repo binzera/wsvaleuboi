@@ -15,7 +15,7 @@ public class Configuracao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CONFIGURACAO_ID_GENERATOR", sequenceName="HIBERNATE_SEQUENCE")
+	@SequenceGenerator(name="CONFIGURACAO_ID_GENERATOR", sequenceName="HIBERNATE_SEQUENCE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CONFIGURACAO_ID_GENERATOR")
 	private Integer id;
 

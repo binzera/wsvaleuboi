@@ -14,11 +14,11 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
-public class Usuario implements Serializable {
+public class Usuario extends AbstractTimestampEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="USUARIO_ID_GENERATOR", sequenceName="seq_usuario")
+	@SequenceGenerator(name="USUARIO_ID_GENERATOR", sequenceName="USUARIO_SEQUENCE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USUARIO_ID_GENERATOR")
 	private Integer id;
 	
@@ -28,7 +28,8 @@ public class Usuario implements Serializable {
 	private String nome;
 
 	private String senha;
-
+	
+	@Column(unique=true, nullable=false)
 	private String usuario;
 
 	//bi-directional many-to-one association to Fazenda
