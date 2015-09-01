@@ -33,7 +33,7 @@ public class RacaRest {
 		
 		List<RacaGado> lista = bc.findByName(entity);
 		
-		if(!lista.isEmpty()){
+		if(lista.isEmpty()){
 			try{
 				entity = bc.insert(entity);
 				if(entity.getId() != null) {

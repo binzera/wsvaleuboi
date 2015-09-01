@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.List;
 
 
@@ -33,15 +35,15 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 	private String usuario;
 
 	//bi-directional many-to-one association to Fazenda
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Fazenda> fazendas;
 
 	//bi-directional many-to-one association to LoteGado
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<LoteGado> loteGados;
 
 	//bi-directional many-to-one association to MovimentacaoGado
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<MovimentacaoGado> movimentacaoGados;
 
 	public Usuario() {
@@ -86,7 +88,8 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
+	
+	@JsonIgnore
 	public List<Fazenda> getFazendas() {
 		return this.fazendas;
 	}
@@ -108,7 +111,8 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 
 		return fazenda;
 	}
-
+	
+	@JsonIgnore
 	public List<LoteGado> getLoteGados() {
 		return this.loteGados;
 	}
@@ -130,7 +134,8 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 
 		return loteGado;
 	}
-
+	
+	@JsonIgnore
 	public List<MovimentacaoGado> getMovimentacaoGados() {
 		return this.movimentacaoGados;
 	}

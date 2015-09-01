@@ -59,10 +59,9 @@ public class SiscofaREST {
 		Object retorno = bc.logar(body);
 		
 		return Response.ok(retorno)
-		.type(MediaType.APPLICATION_JSON)
-		.header("Access-Control-Allow-Origin", "*")
-		.build();
-		//return Response.created(location).entity(id).build();
+				.type(MediaType.APPLICATION_JSON)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	

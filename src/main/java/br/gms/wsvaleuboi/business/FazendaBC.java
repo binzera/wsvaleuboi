@@ -1,8 +1,11 @@
 package br.gms.wsvaleuboi.business;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.gms.wsvaleuboi.entity.Fazenda;
+import br.gms.wsvaleuboi.entity.Usuario;
 import br.gms.wsvaleuboi.persistence.FazendaDAO;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 
@@ -33,6 +36,10 @@ public class FazendaBC extends DelegateCrud<Fazenda, Long, FazendaDAO> {
 		}
 		
 		return retorno;
+	}
+	
+	public List<Fazenda> findByUserId(Usuario user) {
+		return dao.findByUserId(user);
 	}
 
 }

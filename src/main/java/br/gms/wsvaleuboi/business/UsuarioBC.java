@@ -78,7 +78,7 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		if(lista.isEmpty()){
 			retorno = new String("USER_NAO_CADASTRADO");
 		} else if(lista.get(0).getSenha().equals(body.getSenha())){
-			retorno = new String("OK");
+			retorno = lista.get(0);
 		} else {
 			retorno = new String("SENHA_INCORRETA");
 		}

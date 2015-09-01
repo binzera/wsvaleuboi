@@ -45,12 +45,20 @@ public class UsuarioTest{
 	
 	@Test
 	public void insertUser(){
-		Usuario user = new Usuario();
-		user.setEmail("tixa@gmail.com");
-		user.setNome("Gustavo");
-		user.setSenha("soh");
-		user.setUsuario("tixa");
-		user = em.merge(user);
+//		Usuario user = new Usuario();
+//		user.setEmail("tixa@gmail.com");
+//		user.setNome("Gustavo");
+//		user.setSenha("soh");
+//		user.setUsuario("tixa");
+//		user = em.merge(user);
+		
+		
+		Usuario user2 = new Usuario();
+		user2.setEmail("glaubert@gmail.com");
+		user2.setNome("Glaubert");
+		user2.setSenha("soh");
+		user2.setUsuario("binzera");
+		user2 = em.merge(user2);
 	}
 
 }

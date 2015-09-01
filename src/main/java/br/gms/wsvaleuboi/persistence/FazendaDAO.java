@@ -2,13 +2,13 @@ package br.gms.wsvaleuboi.persistence;
 
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
 
-import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 
 import br.gms.wsvaleuboi.entity.Fazenda;
-import br.gms.wsvaleuboi.entity.RacaGado;
+import br.gms.wsvaleuboi.entity.Usuario;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 
 public class FazendaDAO extends JPACrud<Fazenda, Long> {
@@ -45,6 +45,25 @@ public class FazendaDAO extends JPACrud<Fazenda, Long> {
 		
 		return retorno;
 		
+	}
+	
+	
+	public List<Fazenda> findByUserId(Usuario user) {
+		
+		StringBuffer ql = new StringBuffer();
+		ql.append("  from Fazenda f ");
+		ql.append(" where f.usuario = :usuario ");
+
+		TypedQuery<Fazenda> query = getEntityManager().createQuery(ql.toString(), Fazenda.class);
+		query.setParameter("usuario", user);
+		
+		List<Fazenda> results = query.getResultList();
+		
+//		String sql = "SELECT * FROM fazenda WHERE usuario_id = " + user.getId();
+//		Query query = getEntityManager().createNativeQuery(sql);
+//		List<Fazenda> results = query.getResultList();
+
+		return results;
 	}
 	
 }

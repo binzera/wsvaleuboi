@@ -1,5 +1,6 @@
 package br.gms.wsvaleuboi.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,9 +11,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @MappedSuperclass
-public abstract class AbstractTimestampEntity {
+public abstract class AbstractTimestampEntity implements Serializable{
 
-    @Temporal(TemporalType.TIMESTAMP)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false)
     private Date created;
 

@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 
 /**
  * The persistent class for the fazenda database table.
@@ -35,7 +37,7 @@ public class Fazenda extends AbstractTimestampEntity implements Serializable {
 	private Integer qtdAlqueires;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to LoteGado
@@ -68,7 +70,7 @@ public class Fazenda extends AbstractTimestampEntity implements Serializable {
 	public void setQtdAlqueires(Integer qtdAlqueires) {
 		this.qtdAlqueires = qtdAlqueires;
 	}
-
+	
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
