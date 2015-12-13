@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 
 /**
  * The persistent class for the tipo_movimentacao database table.
@@ -32,6 +35,7 @@ public class TipoMovimentacao extends AbstractTimestampEntity implements Seriali
 
 	//bi-directional many-to-one association to MovimentacaoGado
 	@OneToMany(mappedBy="tipoMovimentacao")
+	@JsonIgnore
 	private List<MovimentacaoGado> movimentacaoGados;
 
 	public TipoMovimentacao() {

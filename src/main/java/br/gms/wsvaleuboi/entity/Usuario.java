@@ -1,13 +1,24 @@
 package br.gms.wsvaleuboi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Pattern;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -35,15 +46,18 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 	private String usuario;
 
 	//bi-directional many-to-one association to Fazenda
-	@OneToMany(mappedBy="usuario",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="usuario",fetch=FetchType.LAZY)
+	@JsonManagedReference(value="user-faz")
 	private List<Fazenda> fazendas;
 
 	//bi-directional many-to-one association to LoteGado
 	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="user-lote")
 	private List<LoteGado> loteGados;
 
 	//bi-directional many-to-one association to MovimentacaoGado
 	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="user-mov")
 	private List<MovimentacaoGado> movimentacaoGados;
 
 	public Usuario() {
@@ -89,7 +103,6 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 		this.usuario = usuario;
 	}
 	
-	@JsonIgnore
 	public List<Fazenda> getFazendas() {
 		return this.fazendas;
 	}
@@ -112,7 +125,6 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 		return fazenda;
 	}
 	
-	@JsonIgnore
 	public List<LoteGado> getLoteGados() {
 		return this.loteGados;
 	}
@@ -135,7 +147,6 @@ public class Usuario extends AbstractTimestampEntity implements Serializable {
 		return loteGado;
 	}
 	
-	@JsonIgnore
 	public List<MovimentacaoGado> getMovimentacaoGados() {
 		return this.movimentacaoGados;
 	}

@@ -3,11 +3,15 @@ package br.gms.wsvaleuboi.business;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import br.gms.wsvaleuboi.entity.Fazenda;
+import br.gms.wsvaleuboi.entity.LoteGado;
+import br.gms.wsvaleuboi.entity.MovimentacaoGado;
 import br.gms.wsvaleuboi.entity.Usuario;
 import br.gms.wsvaleuboi.persistence.UsuarioDAO;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
@@ -78,7 +82,11 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		if(lista.isEmpty()){
 			retorno = new String("USER_NAO_CADASTRADO");
 		} else if(lista.get(0).getSenha().equals(body.getSenha())){
-			retorno = lista.get(0);
+			Usuario usuario = lista.get(0);
+			usuario.setFazendas(new ArrayList<Fazenda>());
+			usuario.setLoteGados(new ArrayList<LoteGado>());
+			usuario.setMovimentacaoGados(new ArrayList<MovimentacaoGado>());
+			retorno = usuario;
 		} else {
 			retorno = new String("SENHA_INCORRETA");
 		}

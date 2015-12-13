@@ -14,6 +14,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+
+
 
 /**
  * The persistent class for the movimentacao_gado database table.
@@ -42,17 +48,25 @@ public class MovimentacaoGado extends AbstractTimestampEntity implements Seriali
 	private float valorArroba;
 
 	//bi-directional many-to-one association to LoteGado
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="lote_gado_id")
+	@JsonBackReference(value="lote-mov")
 	private LoteGado loteGado;
+	
+	//bi-directional many-to-one association to Fazenda
+	@ManyToOne
+	@JoinColumn(name="fazenda_id")
+	@JsonBackReference(value="faz-mov")
+	private Fazenda fazenda;
 
 	//bi-directional many-to-one association to TipoMovimentacao
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="tipo_movimentacao_id")
 	private TipoMovimentacao tipoMovimentacao;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JsonBackReference(value="user-mov")
 	private Usuario usuario;
 
 	public MovimentacaoGado() {
@@ -120,6 +134,20 @@ public class MovimentacaoGado extends AbstractTimestampEntity implements Seriali
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the fazenda
+	 */
+	public Fazenda getFazenda() {
+		return fazenda;
+	}
+
+	/**
+	 * @param fazenda the fazenda to set
+	 */
+	public void setFazenda(Fazenda fazenda) {
+		this.fazenda = fazenda;
 	}
 
 }

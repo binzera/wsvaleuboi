@@ -1,8 +1,19 @@
 package br.gms.wsvaleuboi.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 
 /**
@@ -22,7 +33,8 @@ public class Idade extends AbstractTimestampEntity implements Serializable {
 	private String descricao;
 
 	//bi-directional many-to-one association to LoteGado
-	@OneToMany(mappedBy="idade")
+	@JsonIgnore
+	@OneToMany(mappedBy="idade", fetch=FetchType.LAZY)
 	private List<LoteGado> loteGados;
 
 	public Idade() {

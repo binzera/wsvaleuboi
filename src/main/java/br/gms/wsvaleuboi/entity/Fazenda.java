@@ -13,8 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+
+
 
 
 /**
@@ -35,16 +41,54 @@ public class Fazenda extends AbstractTimestampEntity implements Serializable {
 
 	@Column(name="qtd_alqueires")
 	private Integer qtdAlqueires;
+	
+	@Transient
+	private Integer id_usuario;
+	
+	//bi-directional many-to-one association to MovimentacaoGado
+	@OneToMany(mappedBy="fazenda", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="faz-mov")
+	private List<MovimentacaoGado> movimentacaoGados;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
+	@JsonBackReference(value="user-faz")
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to LoteGado
-	@OneToMany(mappedBy="fazenda")
+	@OneToMany(mappedBy="fazenda", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="faz-lote")
 	private List<LoteGado> loteGados;
 
 	public Fazenda() {
+	}
+	
+	/**
+	 * @return the id_usuario
+	 */
+	public Integer getId_usuario() {
+		return this.getUsuario().getId();
+	}
+
+	/**
+	 * @param id_usuario the id_usuario to set
+	 */
+	public void setId_usuario(Integer id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	/**
+	 * @return the movimentacaoGados
+	 */
+	public List<MovimentacaoGado> getMovimentacaoGados() {
+		return movimentacaoGados;
+	}
+
+	/**
+	 * @param movimentacaoGados the movimentacaoGados to set
+	 */
+	public void setMovimentacaoGados(List<MovimentacaoGado> movimentacaoGados) {
+		this.movimentacaoGados = movimentacaoGados;
 	}
 
 	public Integer getId() {

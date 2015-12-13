@@ -16,6 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+
 
 /**
  * The persistent class for the lote_gado database table.
@@ -44,24 +49,28 @@ public class LoteGado extends AbstractTimestampEntity implements Serializable {
 	private float valorArroba;
 
 	//bi-directional many-to-one association to Fazenda
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JsonBackReference(value="faz-lote")
 	private Fazenda fazenda;
 
 	//bi-directional many-to-one association to Idade
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Idade idade;
 
 	//bi-directional many-to-one association to RacaGado
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="raca_gado_id")
+	@JsonBackReference
 	private RacaGado racaGado;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JsonBackReference(value="user-lote")
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to MovimentacaoGado
-	@OneToMany(mappedBy="loteGado")
+	@OneToMany(mappedBy="loteGado", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="lote-mov")
 	private List<MovimentacaoGado> movimentacaoGados;
 
 	public LoteGado() {
